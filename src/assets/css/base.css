@@ -1,0 +1,13 @@
+.wrap-v1 {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+.wrap-v2 {
+	width: 980px;
+	margin: 0 auto;
+}
+
+.topbarBg {
+	background: url('../img/topbar.png') no-repeat 0 -9999px;
+}

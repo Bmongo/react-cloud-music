@@ -1,0 +1,41 @@
+@import "~normalize.css";
+@import '~antd/dist/antd.css';
+
+body, p, h1, h2, h3, h4, h5, h6, dl, dd, ul, ol, th, td, button, figure, input, textarea, form, pre, blockquote, figure {
+	margin: 0;
+	padding: 0;
+}
+
+ol, ul{
+  list-style:none     
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #333;
+	text-decoration: none;
+}
+
+i, em {
+  font-style: normal;
+}
+
+input, textarea, button, select, a {
+	font-size: 12px;
+  outline: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  border: none;
+  vertical-align: middle;
+}

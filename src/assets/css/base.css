@@ -1,3 +1,7 @@
+.no-margin {
+	margin: 0;
+}
+
 .wrap-v1 {
 	width: 1100px;
 	margin: 0 auto;
@@ -10,4 +14,16 @@
 
 .topbarBg {
 	background: url('../img/topbar.png') no-repeat 0 -9999px;
+}
+
+.police-logo {
+	background: url('../img/police.png') no-repeat;
+}
+
+.foot-enter-new {
+	background: url('../img/foot_enter_new.png') no-repeat 0 -9999px;
+}
+
+.foot-enter-tt {
+	background: url('../img/foot_enter_tt.png') no-repeat 0 -9999px;
 }

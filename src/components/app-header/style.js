@@ -21,7 +21,7 @@ export const HeaderLeft = styled.div`
 
 	.logo {
 		display: block;
-		width: 177px;
+		width: 176px;
 		height: 70px;
 		background-position: 0 0;
 		padding-right: 20px;
@@ -33,7 +33,7 @@ export const HeaderLeft = styled.div`
 		position: relative;
 		padding: 0 19px;
 		font-size: 14px;
-		line-height: 70px;
+		line-height: 67px;
 		color: #ccc;
 	}
 	.select-item .hot {

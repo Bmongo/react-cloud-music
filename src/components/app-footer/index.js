@@ -39,7 +39,7 @@ export default memo(function AppFooter() {
 					</p>
 					<p className="info">
 						<span className="mr">{footerInfo.icp.gd}</span>
-						<a className="mr" href={footerInfo.icp.gl.link} target="_blank" rel="noopener noreferrer">{footerInfo.icp.gl.title}</a>
+						<a className="mr-5" href={footerInfo.icp.gl.link} target="_blank" rel="noopener noreferrer">{footerInfo.icp.gl.title}</a>
 						<a href={footerInfo.icp.zj.link} target="_blank" rel="noopener noreferrer">
 							<span className="police-logo logo"></span>
 							<span>{footerInfo.icp.zj.title}</span>

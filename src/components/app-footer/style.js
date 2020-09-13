@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const AppFooterWrapper = styled.div`
 	position: relative;
-	height: 172px;
+	height: 173px;
 	overflow: hidden;
 	border-top: 1px solid #d3d3d3;
 	background: #f2f2f2;
@@ -38,16 +38,24 @@ export const FooterLeft = styled.div`
 	}
 	
 	.info {
+		a {
+			color: #666;
+		}
 		.mr {
 			margin-right: 14px;
 		}
+		.mr-5 {
+			margin-right: 8px;
+		}
 		.logo {
+			box-sizing: border-box;
 			width: 14px;
 			height: 14px;
 			background-size: cover;
 			display: inline-block;
 			margin-right: 2px;
 			vertical-align: -2px;
+			margin-right: 2px;
 		}
 	}
 `

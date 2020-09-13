@@ -34,19 +34,19 @@ export const footerInfo = {
 			link: "https://st.music.163.com/official-terms/service"
 		},
 		{
-			title: "隐私政策",
+			title: " 隐私政策",
 			link: "https://st.music.163.com/official-terms/privacy"
 		},
 		{
-			title: "儿童隐私政策",
+			title: " 儿童隐私政策",
 			link: "https://st.music.163.com/official-terms/children"
 		},
 		{
-			title: "版权投诉指引",
+			title: " 版权投诉指引",
 			link: "https://music.163.com/st/staticdeal/complaints.html"
 		},
 		{
-			title: "意见反馈",
+			title: " 意见反馈 ",
 			link: "https://st.music.163.com/official-terms/privacy"
 		}
 	],
@@ -57,7 +57,7 @@ export const footerInfo = {
 			num: "0571-89853516"
 		},
 		email: {
-			prefix: "举报邮箱：",
+			prefix: " 举报邮箱：",
 			email: "ncm5990@163.com"
 		}
 	},

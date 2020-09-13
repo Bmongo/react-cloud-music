@@ -33,7 +33,7 @@ export const HeaderLeft = styled.div`
 		position: relative;
 		padding: 0 19px;
 		font-size: 14px;
-		line-height: 67px;
+		line-height: 70px;
 		color: #ccc;
 	}
 	.select-item .hot {

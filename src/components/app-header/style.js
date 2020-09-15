@@ -3,16 +3,11 @@ import styled from 'styled-components';
 export const AppHeaderWrapper = styled.div`
 	color: #ccc;
 	background-color: #242424;
-	height: 75px;
+	height: 70px;
 
 	.content {
 		display: flex;
 		justify-content: space-between;
-	}
-
-	.divider {
-		height: 5px;
-		background-color: #C20C0C;
 	}
 `
 

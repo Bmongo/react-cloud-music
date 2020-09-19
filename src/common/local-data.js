@@ -27,6 +27,35 @@ export const navLinks = [
 	}
 ];
 
+export const subNavLinks = [
+	{
+		title: "推荐",
+		exact: true,
+		link: "/discover"
+	},
+	{
+		title: "排行榜",
+		link: "/discover/toplist"
+	},
+	{
+		title: "歌单",
+		icon: true,
+		link: "/discover/playlist"
+	},
+	{
+		title: "主播电台",
+		link: "/discover/djradio"
+	},
+	{
+		title: "歌手",
+		link: "/discover/artist"
+	},
+	{
+		title: "新碟上架",
+		link: "/discover/album"
+	}
+]
+
 export const footerInfo = {
 	protocols: [
 		{

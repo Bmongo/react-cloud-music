@@ -1,17 +1,17 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-// import Discover from "../pages/discover";
-// import Recommend from "../pages/discover/c-page/recommend";
-// import Friend from "../pages/friend";
-// import Download from "../pages/download";
-// import My from "../pages/my";
+const Discover = React.lazy(() => import("../pages/discover"));
+const Recommend = React.lazy(() => import("../pages/discover/c-page/recommend"));
+const Toplist = React.lazy(() => import("../pages/discover/c-page/toplist"));
+const Playlist = React.lazy(() => import("../pages/discover/c-page/playlist"));
+const Djradio = React.lazy(() => import("../pages/discover/c-page/djradio"));
+const Artist = React.lazy(() => import("../pages/discover/c-page/artist"));
+const Album = React.lazy(() => import("../pages/discover/c-page/album"));
 
-const Discover = React.lazy(_ => import("../pages/discover"));
-const Recommend = React.lazy(_ => import("../pages/discover/c-page/recommend"));
-const Friend = React.lazy(_ => import("../pages/friend"));
-const Download = React.lazy(_ => import("../pages/download"));
-const My = React.lazy(_ => import("../pages/my"));
+const Friend = React.lazy(() => import("../pages/friend"));
+const Download = React.lazy(() => import("../pages/download"));
+const My = React.lazy(() => import("../pages/my"));
 
 const routes = [
 	{
@@ -21,17 +21,32 @@ const routes = [
 	},
 	{
 		path: '/discover',
-		exact: true,
 		component: Discover,
 		routes: [
 			{
 				path: "/discover",
 				exact: true,
-				render: () => <Redirect to={"/discover/recommend"} />
+				component: Recommend
 			},
 			{
-				path: "/recommend",
-				component: Recommend
+				path: "/discover/toplist",
+				component: Toplist
+			},
+			{
+				path: "/discover/playlist",
+				component: Playlist
+			},
+			{
+				path: "/discover/djradio",
+				component: Djradio
+			},
+			{
+				path: "/discover/artist",
+				component: Artist
+			},
+			{
+				path: "/discover/album",
+				component: Album
 			}
 		]
 	},

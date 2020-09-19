@@ -27,3 +27,7 @@
 .foot-enter-tt {
 	background: url('../img/foot_enter_tt.png') no-repeat 0 -9999px;
 }
+
+.white-r-icon {
+	background: url('../img/white_r_icon@3x.png') no-repeat;
+}

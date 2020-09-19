@@ -20,16 +20,26 @@ export default memo(function AppHeader() {
 				hot = <i className="topbarBg hot"></i>
 			}
 			return (
-				<NavLink key={item.title} to={item.link} exact={item.exact} className="select-item" activeClassName="active-item">
-					{item.title}
+				<NavLink
+					key={item.title}
+					to={item.link}
+					exact={item.exact}
+					className="select-item"
+					activeClassName="active-item">
+						{item.title}
 					<i className="topbarBg icon"></i>
 					{hot}
 				</NavLink>
 			)
 		} else {
 			return (
-				<a key={item.title} href={item.link} className="select-item" target="_blank" rel="noopener noreferrer">
-					{item.title}
+				<a
+					key={item.title}
+					href={item.link}
+					className="select-item"
+					target="_blank"
+					rel="noopener noreferrer">
+						{item.title}
 				</a>
 			)
 		}

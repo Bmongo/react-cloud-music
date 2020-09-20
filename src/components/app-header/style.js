@@ -59,7 +59,6 @@ export const HeaderLeft = styled.div`
 `
 
 export const HeaderRight = styled.div`
-	font-size: 12px;
 	display: flex;
 
 	.search {
@@ -68,7 +67,6 @@ export const HeaderRight = styled.div`
 		height: 32px;
 		border-radius: 32px;
 		input {
-			font-size: 12px;
 			&::placeholder {
 				color: #9b9b9b;
 				font-size: 12px;
@@ -78,6 +76,7 @@ export const HeaderRight = styled.div`
 
 	.originator {
 		background-color: transparent;
+		font-size: 12px;
     width: 90px;
     height: 32px;
     margin: 19px 0 0 12px;
@@ -105,6 +104,7 @@ export const HeaderRight = styled.div`
 		}
 	}
 	.user .login {
+		font-size: 12px;
 		display: block;
     width: 28px;
     margin-top: 7px;

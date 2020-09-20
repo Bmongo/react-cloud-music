@@ -31,3 +31,32 @@
 .white-r-icon {
 	background: url('../img/white_r_icon@3x.png') no-repeat;
 }
+
+.arrl {
+	background: url("../img/arrl.png") no-repeat;
+}
+.arrl:hover {
+	background: url("../img/arrl_hvr.png") no-repeat;
+}
+
+.arrr {
+	background: url("../img/arrr.png") no-repeat;
+}
+.arrr:hover {
+	background: url("../img/arrr_hvr.png") no-repeat;
+}
+
+.recommend_download {
+	background: url("../img/download.png") no-repeat;
+}
+
+.recommend_download_btn {
+	background: url("../img/download.png") no-repeat 0 9999px;
+}
+.recommend_download_btn:hover {
+	background: url("../img/download.png") no-repeat 0 -290px;
+}
+
+.recommend_wrap {
+	background: url("../img/wrap1.png") repeat-y;
+}

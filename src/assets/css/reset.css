@@ -7,9 +7,15 @@ body, p, h1, h2, h3, h4, h5, h6, dl, dd, ul, ol, th, td, button, figure, input, 
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
   min-width: 982px;
   background: #f5f5f5;
+}
+
+body, textarea, select, input, button {
+  font-size: 12px;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-text-size-adjust: none;
 }
 
 ol, ul{

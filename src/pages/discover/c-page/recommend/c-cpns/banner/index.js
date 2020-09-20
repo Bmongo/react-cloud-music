@@ -64,8 +64,8 @@ const Banner = memo(() => {
               }
           </Carousel>
         </BannerLeft>
-        <BannerRight className='recommend_download'>
-          <Link to="/download" className="recommend_download_btn download"/>
+        <BannerRight className='recommend-download'>
+          <Link to="/download" className="recommend-download-btn download"/>
           <p>PC 安卓 iPhone WP iPad Mac 六大客户端</p>
         </BannerRight>
         <div>

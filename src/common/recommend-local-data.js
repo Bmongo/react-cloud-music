@@ -1,0 +1,1 @@
+export const recommendHotTabs = ["华语", "流行", "摇滚", "民谣", "电子"];

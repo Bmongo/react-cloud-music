@@ -34,10 +34,10 @@ export const BannerWrap = styled.div`
 `
 
 export const BannerLeft = styled.div`
-  width: 750px;
+  width: 730px;
 
   .image {
-    width: 100%;
+    width: 730px;
     height: 285px;
   }
 `

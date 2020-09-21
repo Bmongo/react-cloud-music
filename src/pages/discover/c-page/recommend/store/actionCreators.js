@@ -1,7 +1,8 @@
 import * as actionType from "./constants";
 
 import {
-  fetchBanners
+	fetchBanners,
+	fetchHotRecommend
 } from "@/services/recommend"
 
 const changeBannerAction = (res) => {
@@ -9,6 +10,13 @@ const changeBannerAction = (res) => {
     type: actionType.CHANGE_BANNERS,
     banners: res.banners
   }
+}
+
+const changeHotRecommend = res => {
+	return {
+		type: actionType.CHANGE_HOT_RECOMMEND,
+		hotRecommend: res.result
+	}
 }
 
 export const getBanners = () => {
@@ -19,4 +27,14 @@ export const getBanners = () => {
       console.log(e)
     })
   }
+}
+
+export const getHotRecommend = () => {
+	return dispatch => {
+		fetchHotRecommend().then(res => {
+			dispatch(changeHotRecommend(res))
+		}).catch(e => {
+			console.log(e);
+		})
+	}
 }

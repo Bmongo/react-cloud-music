@@ -5,3 +5,9 @@ export const fetchBanners = () => {
     url: "/banner"
   })
 }
+
+export const fetchHotRecommend = () => {
+	return request({
+		url: "/personalized?limit=8"
+	})
+}

@@ -64,3 +64,10 @@
 .index-img {
 	background: url("../img/index.png") no-repeat 0 -9999px;
 }
+.coverall {
+	background:url("../img/coverall.png") no-repeat 0 -9990px;
+}
+
+.iconall {
+	background: url("../img/iconall.png") no-repeat 0 -9999px;
+}

@@ -7,9 +7,10 @@ export const Container = styled.div`
 		margin: 20px 0 0 -42px;
 
 		.hot-item {
-			width: 140px;
+			box-sizing: content-box;
 			height: 204px;
 			padding-left: 42px;
+			padding-bottom: 30px;
 		}
 	}
 `

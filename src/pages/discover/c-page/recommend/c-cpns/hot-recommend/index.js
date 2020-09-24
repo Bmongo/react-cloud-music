@@ -1,9 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 
-import {
-	getHotRecommend
-} from "../../store/actionCreators";
+import { getHotRecommend } from "../../store/actionCreators";
 
 import PlaylistItem from "@/components/playlist-item"
 import ItemHeader from "../item-header"

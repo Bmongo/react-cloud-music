@@ -11,3 +11,13 @@ export const fetchHotRecommend = () => {
 		url: "/personalized?limit=8"
 	})
 }
+
+export const fetchNewAlbum = (offset, limit) => {
+  return request({
+    url: "/top/album",
+    params: {
+      offset,
+      limit
+    }
+  })
+}

@@ -3,7 +3,8 @@ import * as actionType from "./constants";
 
 const defaultState = Map({
 	banners: [],
-	hotRecommend: [],
+  hotRecommend: [],
+  newAlbum: []
 })
 
 function reducer(state = defaultState, action) {
@@ -11,7 +12,9 @@ function reducer(state = defaultState, action) {
     case actionType.CHANGE_BANNERS:
 			return state.set("banners", action.banners);
 		case actionType.CHANGE_HOT_RECOMMEND:
-			return state.set("hotRecommend",action.hotRecommend)
+			return state.set("hotRecommend",action.hotRecommend);
+		case actionType.CHANGE_NEW_ALBUM:
+			return state.set("newAlbum",action.newAlbum);
     default:
       return state;
   }

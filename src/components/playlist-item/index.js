@@ -16,7 +16,7 @@ const PlaylistItem = memo(props => {
 		<>
 			<ImgArea>
 				<img className="img" src={data.picUrl} alt={data.name} />
-				<Link className="imgMask coverall" to={"/playlist?id=" + data.id}></Link>
+				<Link title={data.name} className="imgMask coverall" to={"/playlist?id=" + data.id}></Link>
 				<div className="overMask coverall">
 					<span className="playBtn iconall" onClick={addPlaylist}></span>
 					<span className="headIcon iconall"></span>

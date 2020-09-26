@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import Banner from "./c-cpns/banner";
 import HotRecommend from "./c-cpns/hot-recommend";
 import NewAlbum from "./c-cpns/new-album";
+import Toplist from "./c-cpns/toplist"
 import { Content, MainLeft, MainRight } from './style';
 
 export default memo(function Recommend() {
@@ -14,6 +15,7 @@ export default memo(function Recommend() {
 				<MainLeft>
 					<HotRecommend/>
 					<NewAlbum/>
+					<Toplist/>
 					{/* <NewAlbum/> */}
 				</MainLeft>
 				<MainRight>2</MainRight>

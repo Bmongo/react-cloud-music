@@ -1,9 +1,12 @@
 import * as actionType from "./constants";
 
+import { toplistIds } from "@/common/recommend-local-data";
+
 import {
 	fetchBanners,
 	fetchHotRecommend,
-	fetchNewAlbum
+	fetchNewAlbum,
+	fetchRecommendToplist
 } from "@/services/recommend"
 
 const changeBannerAction = (res) => {
@@ -50,8 +53,26 @@ const changeNewAlbum = res => {
 export const getNewAlbum = () => {
 	return dispatch => {
 		fetchNewAlbum(0, 10).then(res => {
-			console.log(res)
 			dispatch(changeNewAlbum(res))
+		}).catch(e => {
+			console.log(e)
+		})
+	}
+}
+
+const changeRecommendToplist = (res, idx) => {
+	let result = {
+		toplist: res.playlist
+	}
+	result.type = idx === 0 ? actionType.CHANGE_UP_TOPLIST : idx === 1 ? actionType.CHANGE_NEW_TOPLIST : actionType.CHANGE_ORIGIN_TOPLIST
+	return result
+}
+
+export const getRecommendToplist = idx => {
+	const id = toplistIds[idx]
+	return dispatch => {
+		fetchRecommendToplist(id).then(res => {
+			dispatch(changeRecommendToplist(res, idx))
 		}).catch(e => {
 			console.log(e)
 		})

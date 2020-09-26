@@ -12,6 +12,12 @@
 	margin: 0 auto;
 }
 
+.nowrap {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .topbarBg {
 	background: url('../img/topbar.png') no-repeat 0 -9999px;
 }
@@ -70,4 +76,8 @@
 
 .iconall {
 	background: url("../img/iconall.png") no-repeat 0 -9999px;
+}
+
+.index-bill-img {
+	background: url("../img/index_bill.png") no-repeat;
 }

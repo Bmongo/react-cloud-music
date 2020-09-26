@@ -16,8 +16,18 @@ export const fetchNewAlbum = (offset, limit) => {
   return request({
     url: "/top/album",
     params: {
+      type: 'hot',
       offset,
       limit
+    }
+  })
+}
+
+export const fetchRecommendToplist = id => {
+  return request({
+    url: "/playlist/detail",
+    params: {
+      id
     }
   })
 }

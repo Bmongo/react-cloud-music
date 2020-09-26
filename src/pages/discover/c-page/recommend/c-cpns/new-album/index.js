@@ -1,12 +1,12 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import { getNewAlbum } from "../../store/actionCreators";
 
 import { Carousel } from "antd";
 import ItemHeader from "../item-header";
+import AlbumItem from "@/components/album-item"
 import {
-	Container,
 	Content
 } from "./style";
 
@@ -22,29 +22,38 @@ const NewAlbum = memo(() => {
 		dispatch(getNewAlbum())
 	},[dispatch])
 
+	const carouselRef = useRef()
+
 	return (
-		<Container>
+		<div>
 			<ItemHeader link="/discover/album" title="新碟上架"/>
 			<Content>
-				<Carousel>
-					{
-						[0, 1].map(v => {
-							return (
-								<div key={v}>
-									{
-										// state.newAlbum.slice(v * 5, )
-									}
-								</div>
-							)
-						})
-					}
-				</Carousel>
+				<button className="btn index-img pre" onClick={() => carouselRef.current.prev()}></button>
+				<div className="album">
+					<Carousel ref={carouselRef} dots={false}>
+						{
+							[0, 1].map(v => {
+								return (
+									<div key={v}>
+										{
+											state.newAlbum.slice(v * 5, v * 5 + 5).map(item => {
+												return (
+													<div key={item.id} className="item index-img">
+														<AlbumItem
+															info={item}/>
+													</div>
+												)
+											})
+										}
+									</div>
+								)
+							})
+						}
+					</Carousel>
+				</div>
+				<button className="btn index-img nex" onClick={() => carouselRef.current.next()}></button>
 			</Content>
-			<div className="content">
-				<button className="btn index-img pre"></button>
-				<button className="btn index-img nex"></button>
-			</div>
-		</Container>
+		</div>
 	)
 })
 

@@ -6,6 +6,7 @@ import routes from '@/router'
 
 import AppHeader from '@/components/app-header'
 import AppFooter from '@/components/app-footer'
+import Player from '@/components/player'
 
 export default memo(function App() {
 	return (
@@ -14,6 +15,7 @@ export default memo(function App() {
 			<Suspense fallback={<div>loading</div>}>
         {renderRoutes(routes)}
       </Suspense>
+			<Player/>
 			<AppFooter/>
 		</HashRouter>
 	)

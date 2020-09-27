@@ -4,6 +4,10 @@ import Banner from "./c-cpns/banner";
 import HotRecommend from "./c-cpns/hot-recommend";
 import NewAlbum from "./c-cpns/new-album";
 import Toplist from "./c-cpns/toplist"
+
+import UserProfile from "./c-cpns/user-profile"
+import SettleSinger from "./c-cpns/settle-singer"
+import DjList from "./c-cpns/dj-list"
 import { Content, MainLeft, MainRight } from './style';
 
 export default memo(function Recommend() {
@@ -16,9 +20,12 @@ export default memo(function Recommend() {
 					<HotRecommend/>
 					<NewAlbum/>
 					<Toplist/>
-					{/* <NewAlbum/> */}
 				</MainLeft>
-				<MainRight>2</MainRight>
+				<MainRight>
+					<UserProfile/>
+					<SettleSinger/>
+					<DjList/>
+				</MainRight>
 			</Content>
 		</div>
 	)

@@ -12,5 +12,5 @@ export const MainLeft = styled.div`
 `
 
 export const MainRight = styled.div`
-
+	width: 250px;
 `

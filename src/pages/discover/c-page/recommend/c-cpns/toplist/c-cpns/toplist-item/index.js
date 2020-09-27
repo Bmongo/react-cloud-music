@@ -4,7 +4,17 @@ import { Link } from "react-router-dom";
 import { ToplistItemWrapper } from "./style"
 
 const ToplistItem = memo(props => {
-  const { coverImgUrl, id, name, tracks = [] } = props.info
+	const { coverImgUrl, id, name, tracks = [] } = props.info
+	
+	const playItem = id => {
+		console.log(id);
+	}
+	const addItem = id => {
+		console.log(id);
+	}
+	const favItem = id => {
+		console.log(id);
+	}
   return (
     <ToplistItemWrapper>
       <dl>
@@ -26,13 +36,25 @@ const ToplistItem = memo(props => {
         <dd>
           <ol className="list">
           {
-            tracks.slice(0, 10).map(v => {
+            tracks.slice(0, 10).map((v, i) => {
+							let classTag = i < 3 ? 'idx no-top' : "idx"
               return (
-                <li key={v.id}>{v.name}</li>
+                <li key={v.id} className="list-item">
+									<div className={classTag}>{i + 1}</div>
+									<Link title={v.name} className="link nowrap" to={'/song?id=' + v.id}>{v.name}</Link>
+									<div className="btns">
+										<button className="play-btn btn index-img" onClick={e => playItem(v.id)}/>
+										<button className="add-btn btn icon-img" onClick={e => addItem(v.id)}/>
+              			<button className='favorites btn index-img' onClick={e => favItem(v.id)}/>
+									</div>
+								</li>
               )
             })
           }
           </ol>
+					<div className="more">
+						<Link className="more-btn" to={'/discover/toplist?id=' + id}>查看全部&gt;</Link>
+					</div>
         </dd>
       </dl>
     </ToplistItemWrapper>

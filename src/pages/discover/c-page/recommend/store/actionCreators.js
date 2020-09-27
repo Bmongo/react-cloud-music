@@ -6,7 +6,9 @@ import {
 	fetchBanners,
 	fetchHotRecommend,
 	fetchNewAlbum,
-	fetchRecommendToplist
+	fetchRecommendToplist,
+	fetchRecommendSettleSinger,
+	fetchRecommendDj
 } from "@/services/recommend"
 
 const changeBannerAction = (res) => {
@@ -73,6 +75,40 @@ export const getRecommendToplist = idx => {
 	return dispatch => {
 		fetchRecommendToplist(id).then(res => {
 			dispatch(changeRecommendToplist(res, idx))
+		}).catch(e => {
+			console.log(e)
+		})
+	}
+}
+
+const changeRecommendSettleSinger = res => {
+	return {
+		type: actionType.CHANGE_SETTLE_SINGER,
+		settleSinger: res.artists
+	}
+}
+
+export const getRecommendSettleSinger = () => {
+	return dispatch => {
+		fetchRecommendSettleSinger().then(res => {
+			dispatch(changeRecommendSettleSinger(res))
+		}).catch(e => {
+			console.log(e)
+		})
+	}
+}
+
+const changeDj = res => {
+	return {
+		type: actionType.CHANGE_DJ,
+		dj: res.data.list
+	}
+}
+
+export const getDj = () => {
+	return dispatch => {
+		fetchRecommendDj().then(res => {
+			dispatch(changeDj(res))
 		}).catch(e => {
 			console.log(e)
 		})

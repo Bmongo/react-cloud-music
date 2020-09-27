@@ -31,3 +31,21 @@ export const fetchRecommendToplist = id => {
     }
   })
 }
+
+export const fetchRecommendSettleSinger = () => {
+	return request({
+    url: "/top/artists",
+    params: {
+      limit: 5
+    }
+  })
+}
+
+export const fetchRecommendDj = () => {
+	return request({
+    url: "/dj/toplist/popular",
+    params: {
+      limit: 5
+    }
+  })
+}

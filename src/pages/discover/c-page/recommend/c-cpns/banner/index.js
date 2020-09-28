@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import {
   getBanners
@@ -15,7 +15,7 @@ const Banner = memo(() => {
   const dispatch = useDispatch()
   const state = useSelector(state => ({
     banners: state.getIn(["recommend","banners"])
-  }));
+  }), shallowEqual);
 
   useEffect(() => {
     dispatch(getBanners())

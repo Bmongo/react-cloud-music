@@ -1,3 +1,5 @@
+export const defaultAlbumImgLink = "http://s4.music.126.net/style/web2/img/default/default_album.jpg";
+
 export const navLinks = [
 	{
 		title: "发现音乐",

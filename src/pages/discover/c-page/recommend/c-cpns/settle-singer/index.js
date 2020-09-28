@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import { getRecommendSettleSinger } from "../../store/actionCreators";
 
@@ -16,7 +16,7 @@ const SettleSinger = memo(() => {
 
 	const state = useSelector(state => ({
 		settleSinger: state.getIn(["recommend","settleSinger"])
-	}))
+	}),shallowEqual)
 
 	return (
 		<SingerWrapper>

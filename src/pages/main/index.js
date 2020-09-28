@@ -6,7 +6,7 @@ import routes from '@/router'
 
 import AppHeader from '@/components/app-header'
 import AppFooter from '@/components/app-footer'
-import Player from '@/components/player'
+import Player from '@/pages/player'
 
 export default memo(function App() {
 	return (

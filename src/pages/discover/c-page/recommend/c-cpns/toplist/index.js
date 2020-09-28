@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { getRecommendToplist } from "../../store/actionCreators";
 
@@ -15,7 +15,7 @@ const Toplist = memo(() => {
     upToplist: state.getIn(["recommend","upToplist"]),
     newToplist: state.getIn(["recommend","newToplist"]),
     originToplist: state.getIn(["recommend","originToplist"]),
-  }))
+  }),shallowEqual)
 
   useEffect(() => {
     dispatch(getRecommendToplist(0))

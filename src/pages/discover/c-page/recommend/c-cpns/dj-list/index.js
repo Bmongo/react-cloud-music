@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import { getDj } from "../../store/actionCreators";
 
@@ -16,7 +16,7 @@ const DjList = memo(() => {
 
 	const state = useSelector(state => ({
 		dj: state.getIn(["recommend","dj"])
-	}))
+	}),shallowEqual)
 
 	return (
 		<DjWrapper>

@@ -1,4 +1,5 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import PlayerBg from "./c-cpns/player-bg";
 import PlayerLeftBtns from "./c-cpns/player-left-btns";
@@ -7,6 +8,12 @@ import { PlayWrapper, Content } from "./style"
 
 const Player = memo(() => {
 	let [lock, setLock] = useState(true)
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		
+	}, [dispatch])
 
 	return (
 		<PlayWrapper>

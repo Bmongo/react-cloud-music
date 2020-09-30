@@ -4,7 +4,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { defaultAlbumImgLink } from "@/common/local-data";
 
 import { Link } from 'react-router-dom';
-import { HeadImg, PlayInfo } from "./style";
+import { Slider } from 'antd';
+import { HeadImg, PlayInfo, OtherBtns } from "./style";
 
 const PlayerSongBody = memo(() => {
 
@@ -52,10 +53,27 @@ const PlayerSongBody = memo(() => {
 						) : null
 					}
 				</div>
-				<div className="from">
-					<Link className="btn" to={"/album"}></Link>
+				<div className="barinfo">
+					<Slider className="bar" tooltipVisible={false}/>
+					<div className="time">
+						<span className="now">00:00</span> / <span className="all">00:00</span>
+					</div>
 				</div>
 			</PlayInfo>
+
+			<OtherBtns>
+				<div className="btns-l">
+					<button className="btn playbar-img favorite"></button>
+					<button className="btn playbar-img share"></button>
+				</div>
+				<div className="btns-r">
+					<button className="btn playbar-img volume"></button>
+					<button className="btn playbar-img loop"></button>
+					<div className="list-box">
+						<div className="content playbar-img">{playList.length}</div>
+					</div>
+				</div>
+			</OtherBtns>
 		</>
 	);
 });

@@ -1,20 +1,27 @@
-import React, { Fragment, memo } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import React, { Fragment, memo, useEffect } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { defaultAlbumImgLink } from "@/common/local-data";
 
 import { Link } from 'react-router-dom';
 import { Slider } from 'antd';
-import { HeadImg, PlayInfo, OtherBtns } from "./style";
+import { HeadImg, PlayInfo } from "./style";
 
 const PlayerSongBody = memo(() => {
 
-	const { playIdx, playList } = useSelector(state => ({
-		playIdx: state.getIn(["player", "playIdx"]),
+	const { playIdx, playList, playSong } = useSelector(state => ({
+		playIdx: state.getIn(["player","playIdx"]),
+		playSong: state.getIn(["player", "playSong"]),
 		playList: state.getIn(["player", "playList"])
 	}), shallowEqual)
 
-	let playing = (playIdx !== -1 && playList[playIdx]) || {};
+	let playing = (playIdx > -1 && playIdx < playList.length && playList[playIdx])  || {};
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+
+	}, [dispatch])
 
 	return (
 		<>
@@ -60,20 +67,6 @@ const PlayerSongBody = memo(() => {
 					</div>
 				</div>
 			</PlayInfo>
-
-			<OtherBtns>
-				<div className="btns-l">
-					<button className="btn playbar-img favorite"></button>
-					<button className="btn playbar-img share"></button>
-				</div>
-				<div className="btns-r">
-					<button className="btn playbar-img volume"></button>
-					<button className="btn playbar-img loop"></button>
-					<div className="list-box">
-						<div className="content playbar-img">{playList.length}</div>
-					</div>
-				</div>
-			</OtherBtns>
 		</>
 	);
 });

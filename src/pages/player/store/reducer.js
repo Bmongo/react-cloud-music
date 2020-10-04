@@ -2,6 +2,8 @@ import { Map } from "immutable";
 import * as actionType from "./constants";
 
 const defaultState = Map({
+  //0循环 1随机 2单曲循环
+  playWay: 0,
 	playIdx: -1,
 	playSong: {},
 	playSongInfo: {},
@@ -10,12 +12,14 @@ const defaultState = Map({
 
 function reducer(state = defaultState, action) {
   switch(action.type) {
-    case actionType.CHANGER_PLAYING_SONG_IDX:
+    case actionType.CHANGE_PLAYING_SONG_IDX:
       return state.set("playIdx", action.playIdx);
-		case actionType.CHANGER_PLAYING_SONG:
+		case actionType.CHANGE_PLAYING_SONG:
 			return state.set("playSong", action.playSong);
-		case actionType.CHANGER_PLAY_LIST:
-			return state.set("playList",action.playList);
+		case actionType.CHANGE_PLAY_LIST:
+      return state.set("playList",action.playList);
+    case actionType.CHANGE_PLAY_WAY:
+      return state.set("playWay", action.playWay)
     default:
       return state;
   }

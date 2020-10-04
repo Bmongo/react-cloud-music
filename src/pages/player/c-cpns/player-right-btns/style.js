@@ -38,6 +38,10 @@ export const Wrapper = styled.div`
 		.volume:hover { background-position: -31px -248px; }
 		.loop { background-position: -3px -344px; }
 		.loop:hover { background-position: -33px -344px; }
+		.one { background-position: -66px -344px; }
+		.one:hover { background-position: -93px -344px; }
+		.shuffle { background-position: -66px -248px; }
+		.shuffle:hover { background-position: -93px -248px; }
 
 		.list-box {
 			width: 59px;

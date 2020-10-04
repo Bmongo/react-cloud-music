@@ -9,7 +9,7 @@ import { HeadImg, PlayInfo } from "./style";
 
 const PlayerSongBody = memo(() => {
 
-	const { playIdx, playList, playSong } = useSelector(state => ({
+	const { playIdx, playList, playSongInfo } = useSelector(state => ({
 		playIdx: state.getIn(["player","playIdx"]),
 		playSong: state.getIn(["player", "playSong"]),
 		playList: state.getIn(["player", "playList"])

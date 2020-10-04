@@ -3,7 +3,7 @@ import { fetchSongUrl, fetchSongsDetail } from "@/services/player"
 
 const changeList = detailArr => {
 	return {
-		type: actionType.CHANGER_PLAY_LIST,
+		type: actionType.CHANGE_PLAY_LIST,
 		playList: detailArr
 	}
 }
@@ -18,7 +18,7 @@ export const getListDetail = ids => {
 
 const changePlayingSong = song => {
   return {
-    type: actionType.CHANGER_PLAYING_SONG,
+    type: actionType.CHANGE_PLAYING_SONG,
     playSong: song
   }
 }
@@ -28,5 +28,21 @@ export const getSongUrl = id => {
 		fetchSongUrl(id).then(res => {
 			dispatch(changePlayingSong(res.data[0]))
 		})
+	}
+}
+
+const changePlayWay = way => {
+	return {
+		type: actionType.CHANGE_PLAY_WAY,
+		playWay: way
+	}
+}
+
+export const changeWay = idx => {
+	return (dispatch, getState) => {
+		let playWay = getState().getIn(["player","playWay"])
+		playWay = typeof idx === 'number' ? idx : playWay + 1;
+		playWay = playWay > 2 ? 0 : playWay;
+		dispatch(changePlayWay(playWay))
 	}
 }

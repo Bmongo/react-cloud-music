@@ -5,9 +5,7 @@ import { getListIds } from "@/utils/playerCookie";
 import { getListDetail } from "./store/actionCreators"
 
 import PlayerBg from "./c-cpns/player-bg";
-import PlayerLeftBtns from "./c-cpns/player-left-btns";
-import PlayerSongBody from "./c-cpns/player-song-body";
-import PlayerRightBtns from "./c-cpns/player-right-btns";
+import PlayerBar from "./c-cpns/player-bar"
 import { PlayWrapper, Content } from "./style"
 
 const Player = memo(() => {
@@ -25,9 +23,7 @@ const Player = memo(() => {
 			<div className={"container " + (lock? "lock" : '')}>
 				<PlayerBg setLock={setLock} lock={lock}/>
 				<Content>
-					<PlayerLeftBtns/>
-					<PlayerSongBody/>
-					<PlayerRightBtns/>
+					<PlayerBar/>
 				</Content>
 			</div>
 		</PlayWrapper>

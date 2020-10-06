@@ -6,7 +6,6 @@ const defaultState = Map({
   playWay: 0,
 	playIdx: -1,
 	playSong: {},
-	playSongInfo: {},
   playList: []
 })
 
@@ -15,7 +14,7 @@ function reducer(state = defaultState, action) {
     case actionType.CHANGE_PLAYING_SONG_IDX:
       return state.set("playIdx", action.playIdx);
 		case actionType.CHANGE_PLAYING_SONG:
-			return state.set("playSong", action.playSong);
+			return state.set("playSong", action.song);
 		case actionType.CHANGE_PLAY_LIST:
       return state.set("playList",action.playList);
     case actionType.CHANGE_PLAY_WAY:

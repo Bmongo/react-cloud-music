@@ -47,30 +47,42 @@ const changePlaySongIdx = playIdx => {
 	}
 }
 
-export const autoChangeSong = () => {
+export const changeSong = ActionIdx => {
 	return (dispatch, getState) => {
-		let { playIdx, playWay, playList } = getState()
+		let playIdx = getState().getIn(["player", "playIdx"])
+		let playWay = getState().getIn(["player", "playWay"])
+		let playList = getState().getIn(["player", "playList"])
+		if(!playList || playList.length === 0) return;
 
 		// 获取播放顺序得到下一个下标
 		let way = playWayArr[playWay]
 		let newIdx = playIdx
-		switch(way) {
-			case "loop":
-				newIdx += 1;
-				if(newIdx >= playList.length) {
-					newIdx = 0
-				}
-				break;
-			case "shuffle":
-				while(newIdx === playIdx) {
-					newIdx = (Math.random() * playList.length) >> 0
-				}
-				break;
-			case "one":
-				newIdx = newIdx < 0 ? 0 : newIdx
-				break;
-			default:
-				break;
+		if(!ActionIdx) {
+			switch(way) {
+				case "loop":
+					newIdx += 1;
+					if(newIdx >= playList.length) {
+						newIdx = 0
+					}
+					break;
+				case "shuffle":
+					while(newIdx === playIdx) {
+						newIdx = (Math.random() * playList.length) >> 0
+					}
+					break;
+				case "one":
+					newIdx = newIdx < 0 ? 0 : newIdx
+					break;
+				default:
+					break;
+			}
+		} else {
+			newIdx += ActionIdx
+			if(newIdx >= playList.length) {
+				newIdx = 0
+			} else if(newIdx < 0) {
+				newIdx = playList.length - 1
+			}
 		}
 
 		// 获取歌取

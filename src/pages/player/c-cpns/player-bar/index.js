@@ -1,26 +1,45 @@
-import React, { memo, Fragment, useRef, useState, useCallback } from 'react';
+import React, { memo, Fragment, useRef, useState, useCallback, useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { defaultAlbumImgLink } from "@/common/local-data";
 import { playWayArr } from "@/common/player-local-data"
-import { changeWay } from "../../store/actionCreators"
+import { getListDetail, changeSong, changeWay } from "../../store/actionCreators"
+import { getListIds } from "@/utils/playerCookie";
+import { formatMinuteSecond } from '@/utils/format';
 
 import { Link } from 'react-router-dom';
 import { Slider } from "antd"
 import { LeftWrapper, RightWrapper, HeadImg, PlayInfo } from "./style"
 
 const PlayerBar = memo(() => {
-
 	const [isPlaying, setIsPlaying] = useState(false)
+	const [nowTime, setNowTime] = useState(0)
+	const [realNowTime, setRealNowTime] = useState(0)
+	const [isChanging, setIsChanging] = useState(false)
 
-	const { playIdx, playList, playWay } = useSelector(state => ({
+	const { playIdx, playList, playWay, playSong } = useSelector(state => ({
+		playSong: state.getIn(["player", "playSong"]),
 		playWay: state.getIn(["player", "playWay"]),
-		playIdx: state.getIn(["player","playIdx"]),
+		playIdx: state.getIn(["player", "playIdx"]),
 		playList: state.getIn(["player", "playList"])
 	}), shallowEqual)
+	const dispatch = useDispatch()
 
 	const audioRef = useRef()
-	const dispatch = useDispatch()
+
+	useEffect(() => {
+		let idsStr = getListIds()
+		idsStr && dispatch(getListDetail(idsStr))
+	}, [dispatch])
+
+	useEffect(() => {
+		audioRef.current.src = playSong.url
+		audioRef.current.play().then(() => {
+			setIsPlaying(true)
+		}).catch(() => {
+			setIsPlaying(false)
+		})
+	}, [playSong])
 
 	const changePlayWay = () => {
 		dispatch(changeWay())
@@ -28,11 +47,52 @@ const PlayerBar = memo(() => {
 
 	const play = useCallback(() => {
 		setIsPlaying(!isPlaying)
-	},[isPlaying])
+		isPlaying ? audioRef.current.pause() : audioRef.current.play().catch(() => {
+			if (!audioRef.current.src || audioRef.current.src.indexOf("undefined") !== -1) {
+				dispatch(changeSong())
+			} else {
+				setIsPlaying(false)
+			}
+		})
+	}, [isPlaying, dispatch])
 
+	const sliderChange = e => {
+		setIsChanging(true)
+		setNowTime(e)
+	}
+
+	const afterChange = value => {
+		if(isChanging) {
+			console.log('change');
+			if(((value / 1000 >> 0) !== (realNowTime / 1000 >> 0)) && Math.abs(realNowTime - value) > 1000) {
+				audioRef.current.currentTime = value;
+				setRealNowTime(value)
+			}
+			setIsChanging(false)
+		}
+	}
+
+	const timeUpdate = e => {
+		if(!isChanging) {
+			let t = e.target.currentTime * 1000
+			if((t / 1000 >> 0) !== (nowTime / 1000 >> 0)) {
+				setNowTime(t)
+			}
+		}
+	}
+
+	const timeEnd = () => {
+		let playWayType = playWayArr[playWay]
+		if((playList.length === 1 && playWayType === 'loop') || playWayType === 'one') {
+			setNowTime(0)
+			audioRef.current.play()
+		} else {
+			dispatch(changeSong())
+		}
+	}
 
 	let playWayType = playWayArr[playWay]
-	let playingSongInfo = (playIdx > -1 && playIdx < playList.length && playList[playIdx])  || {};
+	let playingSongInfo = (playIdx > -1 && playIdx < playList.length && playList[playIdx]) || {};
 
 	return (
 		<>
@@ -43,7 +103,7 @@ const PlayerBar = memo(() => {
 					onClick={() => play()}></button>
 				<button className="btn next playbar-img"></button>
 			</LeftWrapper>
-			
+
 			<HeadImg>
 				<img
 					className="img"
@@ -54,7 +114,7 @@ const PlayerBar = memo(() => {
 					to={"/song?id=" + playingSongInfo.id}
 					onClick={e => { !playingSongInfo.id && e.preventDefault() }} />
 			</HeadImg>
-			
+
 			<PlayInfo>
 				<div className="head">
 					{
@@ -65,7 +125,7 @@ const PlayerBar = memo(() => {
 									{
 										playingSongInfo.ar.map((v, i) => {
 											let tag = <Link key={'ky' + v.id} className="item" to={"/artist?id=" + v.id}>{v.name}</Link>
-											if(i !== 0){
+											if (i !== 0) {
 												return (
 													<Fragment key={'k' + v.id}>/{tag}</Fragment>
 												)
@@ -80,9 +140,17 @@ const PlayerBar = memo(() => {
 					}
 				</div>
 				<div className="barinfo">
-					<Slider className="bar" tooltipVisible={false}/>
+					<Slider
+						className="bar"
+						tooltipVisible={false}
+						min={0}
+						max={playingSongInfo.dt}
+						value={nowTime}
+						onChange={sliderChange}
+						onAfterChange={afterChange}
+					/>
 					<div className="time">
-						<span className="now">00:00</span> / <span className="all">00:00</span>
+						<span className="now">{formatMinuteSecond(nowTime)}</span> / <span className="all">{formatMinuteSecond(playingSongInfo.dt)}</span>
 					</div>
 				</div>
 			</PlayInfo>
@@ -100,7 +168,7 @@ const PlayerBar = memo(() => {
 					</div>
 				</div>
 			</RightWrapper>
-			<audio ref={audioRef}/>
+			<audio ref={audioRef} onTimeUpdate={timeUpdate} onEnded={timeEnd} />
 		</>
 	);
 });

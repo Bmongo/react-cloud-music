@@ -94,3 +94,19 @@ export const changeSong = ActionIdx => {
 
 	}
 }
+
+export const addSongToList = info => {
+	return (dispatch, getState) => {
+		let playList = getState().getIn(["player", "playList"])
+		let ids = []
+		if(info instanceof Array) {
+			// 如果是数组，是加入一个歌单的情况
+			// 1.获取不在列表中的数组
+			
+		} else {
+			let findIdx = playList.findIndex(v => v.id === Number(info))
+			if(findIdx === -1) ids.push(info)
+		}
+		if(ids.length === 0) return
+	}
+}

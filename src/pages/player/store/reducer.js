@@ -6,7 +6,10 @@ const defaultState = Map({
   playWay: 0,
 	playIdx: -1,
 	playSong: {},
-  playList: []
+	playList: [],
+	
+	// 存放播放列表的idx
+	locationArr: []
 })
 
 function reducer(state = defaultState, action) {
@@ -18,7 +21,9 @@ function reducer(state = defaultState, action) {
 		case actionType.CHANGE_PLAY_LIST:
       return state.set("playList",action.playList);
     case actionType.CHANGE_PLAY_WAY:
-      return state.set("playWay", action.playWay)
+			return state.set("playWay", action.playWay);
+		case actionType.CHANGE_LOCATION_ARR:
+			return state.set("locationArr", action.arr)
     default:
       return state;
   }

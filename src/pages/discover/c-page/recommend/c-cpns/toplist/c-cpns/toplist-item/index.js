@@ -1,20 +1,26 @@
 import React, { memo } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { addSongToList } from "@/pages/player/store/actionCreators";
 
 import { Link } from "react-router-dom";
 import { ToplistItemWrapper } from "./style"
 
 const ToplistItem = memo(props => {
 	const { coverImgUrl, id, name, tracks = [] } = props.info
+
+	const dispatch = useDispatch()
 	
 	const playItem = id => {
 		console.log(id);
 	}
 	const addItem = id => {
-		console.log(id);
+		dispatch(addSongToList(id))
 	}
 	const favItem = id => {
 		console.log(id);
 	}
+	
   return (
     <ToplistItemWrapper>
       <dl>

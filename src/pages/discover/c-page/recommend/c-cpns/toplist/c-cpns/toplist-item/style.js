@@ -85,6 +85,8 @@ export const ToplistItemWrapper = styled.div`
 			}
 
 			.link {
+				display: block;
+				width: 95%;
 				color: #000;
 			}
 			.link:hover {

@@ -10,11 +10,11 @@ const ListHd = memo(() => {
 	return (
 		<Wrapper className="playlist-bg">
 			<h4>播放列表({playList.length})</h4>
-			<a onClick={e => e.preventDefault()} className="btn favbtn">
+			<a onClick={e => e.preventDefault()} className="btn favbtn" href=" ">
 				<span className="ico fav playlist-img"></span>
 				收藏全部
 			</a>
-			<a onClick={e => e.preventDefault()} className="btn clebtn">
+			<a onClick={e => e.preventDefault()} className="btn clebtn" href=" ">
 				<span className="ico cle playlist-img"></span>
 				清除
 			</a>

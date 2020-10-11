@@ -93,3 +93,11 @@
 .playbar-img {
 	background: url("../img/playbar.png") no-repeat 0 -9999px;
 }
+
+.playlist-bg {
+	background: url("../img/playlist_bg.png") repeat-y;
+}
+
+.playlist-img {
+	background: url("../img/playlist.png") no-repeat 0 -9999px;
+}

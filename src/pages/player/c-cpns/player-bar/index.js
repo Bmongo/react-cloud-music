@@ -10,6 +10,7 @@ import { formatMinuteSecond } from '@/utils/format';
 import { Link } from 'react-router-dom';
 import { Slider } from "antd"
 import { LeftWrapper, RightWrapper, HeadImg, PlayInfo } from "./style"
+import PlayerPanel from "../player-panel"
 
 const PlayerBar = memo(() => {
 	const [isPlaying, setIsPlaying] = useState(false)
@@ -185,6 +186,7 @@ const PlayerBar = memo(() => {
 				</div>
 			</RightWrapper>
 			<audio ref={audioRef} onTimeUpdate={timeUpdate} onEnded={timeEnd} />
+			<PlayerPanel/>
 		</>
 	);
 });

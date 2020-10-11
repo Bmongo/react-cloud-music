@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Wrapper } from "./style";
-import { Link } from "react-router-dom";
 
 const ListHd = memo(() => {
 	const { playList } = useSelector(state => ({

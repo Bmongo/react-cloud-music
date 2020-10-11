@@ -4,7 +4,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { defaultAlbumImgLink } from "@/common/local-data";
 import { playWayArr } from "@/common/player-local-data"
 import { getListDetail, changeSong, changeWay } from "../../store/actionCreators"
-import { getListIds, setListIds } from "@/utils/playerCookie";
+import { getListIds, getPlayWay, setListIds, setPlayWay } from "@/utils/playerCookie";
 import { formatMinuteSecond } from '@/utils/format';
 
 import { Link } from 'react-router-dom';
@@ -14,6 +14,8 @@ import { LeftWrapper, RightWrapper, HeadImg, PlayInfo } from "./style"
 const PlayerBar = memo(() => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [isChanging, setIsChanging] = useState(false)
+	const [playWayType, setPlayWayType] = useState("")
+	const [playingSongInfo, setPlayingSongInfo] = useState(false)
 	const [nowTime, setNowTime] = useState(0)
 
 	const { playIdx, playList, playWay, playSong, locationArr } = useSelector(state => ({
@@ -27,20 +29,25 @@ const PlayerBar = memo(() => {
 	const dispatch = useDispatch()
 	const audioRef = useRef()
 
+	// 获取播放记录和播放方式
 	useEffect(() => {
 		let idsStr = getListIds()
 		idsStr && dispatch(getListDetail(idsStr))
+		let way = getPlayWay()
+		way && dispatch(changeWay(way))
 	}, [dispatch])
 
+	// 保存播放记录、播放方式到Cookie中
 	useEffect(() => {
 		const listener = () => {
 			setListIds(playList.map(v => v.id))
+			setPlayWay(playWay)
 		};
 		window.addEventListener('beforeunload', listener);
 		return () => {
 			window.removeEventListener('beforeunload', listener)
 		}
-	}, [playList]);
+	}, [playList, playWay]);
 
 	useEffect(() => {
 		audioRef.current.src = playSong.url
@@ -50,6 +57,15 @@ const PlayerBar = memo(() => {
 			setIsPlaying(false)
 		})
 	}, [playSong])
+
+	// 变量设置
+	useEffect(() => {
+		setPlayWayType(playWayArr[playWay])
+	}, [playWay])
+	useEffect(() => {
+		let info = (playIdx > -1 && playIdx < playList.length && playList[locationArr[playIdx]]) || {};
+		setPlayingSongInfo(info)
+	}, [playIdx, playList, locationArr])
 
 	const play = useCallback(() => {
 		setIsPlaying(!isPlaying)
@@ -90,9 +106,6 @@ const PlayerBar = memo(() => {
 		setIsChanging(false)
 		setNowTime(0)
 	}
-
-	let playWayType = playWayArr[playWay]
-	let playingSongInfo = (playIdx > -1 && playIdx < playList.length && playList[locationArr[playIdx]]) || {};
 
 	return (
 		<>

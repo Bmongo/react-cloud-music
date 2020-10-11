@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addSongToList } from "@/pages/player/store/actionCreators";
+import { addSongToList, changeSongById } from "@/pages/player/store/actionCreators";
 
 import { Link } from "react-router-dom";
 import { ToplistItemWrapper } from "./style"
@@ -12,7 +12,7 @@ const ToplistItem = memo(props => {
 	const dispatch = useDispatch()
 	
 	const playItem = id => {
-		console.log(id);
+    dispatch(changeSongById(id))
 	}
 	const addItem = id => {
 		dispatch(addSongToList(id))
@@ -49,9 +49,9 @@ const ToplistItem = memo(props => {
 									<div className={classTag}>{i + 1}</div>
 									<Link title={v.name} className="link nowrap" to={'/song?id=' + v.id}>{v.name}</Link>
 									<div className="btns">
-										<button className="play-btn btn index-img" onClick={e => playItem(v.id)}/>
-										<button className="add-btn btn icon-img" onClick={e => addItem(v.id)}/>
-              			<button className='favorites btn index-img' onClick={e => favItem(v.id)}/>
+										<button className="play-btn btn index-img" onClick={() => playItem(v.id)}/>
+										<button className="add-btn btn icon-img" onClick={() => addItem(v.id)}/>
+              			<button className='favorites btn index-img' onClick={() => favItem(v.id)}/>
 									</div>
 								</li>
               )

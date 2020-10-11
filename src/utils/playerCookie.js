@@ -14,12 +14,12 @@ export const removeList = () => {
 }
 
 export const setPlayWay = idx => {
-	console.log(idx)
 	Cookie.set("play_way",idx)
 }
 
 export const getPlayWay = () => {
-	return Cookie.get("play_way")
+	let way = Cookie.get("play_way")
+	return Number(way)
 }
 
 export const removePlayWay = () => {

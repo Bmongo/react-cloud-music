@@ -28,6 +28,9 @@ const getLocationArr = getState => {
 		}
 	} else if (playIdx !== -1) {
 		arr.push(locationArr[playIdx])
+	} else {
+		let idx = playIdx >= 0 ? playIdx : 0
+		arr = [idx]
 	}
 
 	return arr
@@ -59,11 +62,20 @@ const changePlayWay = way => {
 
 export const changeWay = idx => {
 	return (dispatch, getState) => {
+		let playIdx = getState().getIn(["player", "playIdx"])
+		let locationArr = getState().getIn(["player", "locationArr"])
 		let playWay = getState().getIn(["player", "playWay"])
+
 		playWay = typeof idx === 'number' ? idx : playWay + 1;
 		playWay = playWay > 2 ? 0 : playWay;
+
 		dispatch(changePlayWay(playWay))
+
 		let arr = getLocationArr(getState)
+		let nowIdx = locationArr[playIdx]
+		let newidx = arr.findIndex(v => v === nowIdx)
+		if(newidx !== playIdx) dispatch(changePlaySongIdx(newidx))
+
 		dispatch(locationArrAct(arr))
 	}
 }
@@ -102,15 +114,47 @@ export const changeSong = ActionIdx => {
 			newIdx = playList.length - 1
 		}
 
-
 		if ((playSong.id && way === 'one') || (playSong.id && playList.length === 1 && way === 'loop')) {
 			dispatch(changePlaySong({ ...playSong }))
 		} else {
-			// 获取歌取
+			// 获取歌曲
 			fetchSongUrl(playList[locationArr[newIdx]].id).then(res => {
 				let song = res.data[0]
 				dispatch(changePlaySongIdx(newIdx))
 				dispatch(changePlaySong(song))
+			})
+		}
+
+	}
+}
+
+export const changeSongById = id => {
+	return (dispatch, getState) => {
+		// 1.检查是否在列表中，是的话直接改变playIdx、获取歌曲，没有就加到最后，然后改变playIdx、
+		let playList = getState().getIn(["player", "playList"])
+		let playIdx = getState().getIn(["player", "playIdx"])
+		let locationArr = getState().getIn(["player", "locationArr"])
+
+		let oldIdx = playList.findIndex(v => v.id === id)
+		// 播放的正是这首
+		if (playIdx === oldIdx && playIdx !== -1) return
+
+		if (oldIdx === -1) {
+			fetchSongsDetail(id).then(res => {
+				dispatch(changeList([...playList, ...res.songs]))
+				let arr = getLocationArr(getState)
+				dispatch(locationArrAct(arr))
+				fetchSongUrl(id).then(res => {
+					let song = res.data[0]
+					dispatch(changePlaySong(song))
+					dispatch(changePlaySongIdx(arr.findIndex(v => v === playList.length)))
+				})
+			})
+		} else {
+			fetchSongUrl(id).then(res => {
+				let song = res.data[0]
+				dispatch(changePlaySong(song))
+				dispatch(changePlaySongIdx(locationArr.findIndex(v => v === oldIdx)))
 			})
 		}
 

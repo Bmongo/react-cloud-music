@@ -94,6 +94,13 @@ const changePlaySongIdx = playIdx => {
 	}
 }
 
+const changePlaySongInfoAct = info => {
+	return {
+		type: actionType.CHANGE_PLAYING_SONG_INFO,
+		info
+	}
+}
+
 export const changeSong = ActionIdx => {
 	return (dispatch, getState) => {
 		ActionIdx = !ActionIdx && ActionIdx !== 0 ? 1 : ActionIdx
@@ -117,11 +124,13 @@ export const changeSong = ActionIdx => {
 		if ((playSong.id && way === 'one') || (playSong.id && playList.length === 1 && way === 'loop')) {
 			dispatch(changePlaySong({ ...playSong }))
 		} else {
+			let nowSongInfo = playList[locationArr[newIdx]]
 			// 获取歌曲
-			fetchSongUrl(playList[locationArr[newIdx]].id).then(res => {
+			fetchSongUrl(nowSongInfo.id).then(res => {
 				let song = res.data[0]
 				dispatch(changePlaySongIdx(newIdx))
 				dispatch(changePlaySong(song))
+				dispatch(changePlaySongInfoAct({...nowSongInfo}))
 			})
 		}
 
@@ -142,6 +151,8 @@ export const changeSongById = id => {
 		if (oldIdx === -1) {
 			fetchSongsDetail(id).then(res => {
 				dispatch(changeList([...playList, ...res.songs]))
+				dispatch(changePlaySongInfoAct(res.songs[0]))
+
 				let arr = getLocationArr(getState)
 				dispatch(locationArrAct(arr))
 				fetchSongUrl(id).then(res => {
@@ -155,6 +166,7 @@ export const changeSongById = id => {
 				let song = res.data[0]
 				dispatch(changePlaySong(song))
 				dispatch(changePlaySongIdx(locationArr.findIndex(v => v === oldIdx)))
+				dispatch(changePlaySongInfoAct(playList[oldIdx]))
 			})
 		}
 

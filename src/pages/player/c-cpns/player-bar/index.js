@@ -16,14 +16,12 @@ const PlayerBar = memo(() => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [isChanging, setIsChanging] = useState(false)
 	const [playWayType, setPlayWayType] = useState("")
-	const [playingSongInfo, setPlayingSongInfo] = useState(false)
 	const [nowTime, setNowTime] = useState(0)
 
-	const { playIdx, playList, playWay, playSong, locationArr } = useSelector(state => ({
+	const { playList, playWay, playSong, playSongInfo } = useSelector(state => ({
 		playSong: state.getIn(["player", "playSong"]),
 		playWay: state.getIn(["player", "playWay"]),
-		playIdx: state.getIn(["player", "playIdx"]),
-		locationArr: state.getIn(["player", "locationArr"]),
+		playSongInfo: state.getIn(["player", "playSongInfo"]),
 		playList: state.getIn(["player", "playList"])
 	}), shallowEqual)
 
@@ -63,10 +61,6 @@ const PlayerBar = memo(() => {
 	useEffect(() => {
 		setPlayWayType(playWayArr[playWay])
 	}, [playWay])
-	useEffect(() => {
-		let info = (playIdx > -1 && playIdx < playList.length && playList[locationArr[playIdx]]) || {};
-		setPlayingSongInfo(info)
-	}, [playIdx, playList, locationArr])
 
 	const play = useCallback(() => {
 		setIsPlaying(!isPlaying)
@@ -121,24 +115,24 @@ const PlayerBar = memo(() => {
 			<HeadImg>
 				<img
 					className="img"
-					src={(playingSongInfo.al && (playingSongInfo.al.picUrl + "?param=34y34")) || defaultAlbumImgLink}
+					src={(playSongInfo.al && (playSongInfo.al.picUrl + "?param=34y34")) || defaultAlbumImgLink}
 					alt="none" />
 				<Link
 					className="mask playbar-img"
-					to={"/song?id=" + playingSongInfo.id}
-					onClick={e => { !playingSongInfo.id && e.preventDefault() }} />
+					to={"/song?id=" + playSongInfo.id}
+					onClick={e => { !playSongInfo.id && e.preventDefault() }} />
 			</HeadImg>
 
 			<PlayInfo>
 				<div className="head">
 					{
-						playingSongInfo.id ? (
+						playSongInfo.id ? (
 							<>
-								<Link className="name nowrap" to={"/song?id=" + playingSongInfo.id}>{playingSongInfo.name}</Link>
-								<div className="artist nowrap">
+								<Link className="name nowrap" to={"/song?id=" + playSongInfo.id}>{playSongInfo.name}</Link>
+								<div className="nowrap">
 									{
-										playingSongInfo.ar.map((v, i) => {
-											let tag = <Link key={'ky' + v.id} className="item" to={"/artist?id=" + v.id}>{v.name}</Link>
+										playSongInfo.ar.map((v, i) => {
+											let tag = <Link key={'ky' + v.id} className="artist" to={"/artist?id=" + v.id}>{v.name}</Link>
 											if (i !== 0) {
 												return (
 													<Fragment key={'k' + v.id}>/{tag}</Fragment>
@@ -158,7 +152,7 @@ const PlayerBar = memo(() => {
 						className="bar"
 						tooltipVisible={false}
 						min={0}
-						max={playingSongInfo.dt}
+						max={playSongInfo.dt}
 						value={nowTime}
 						onChange={sliderChange}
 						onAfterChange={afterChange}
@@ -166,7 +160,7 @@ const PlayerBar = memo(() => {
 					<div className="time">
 						<span className="now">{formatMinuteSecond(nowTime)}
 						</span> / <span className="all">
-							{formatMinuteSecond(playingSongInfo.dt)}
+							{formatMinuteSecond(playSongInfo.dt)}
 						</span>
 					</div>
 				</div>

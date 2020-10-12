@@ -74,7 +74,7 @@ export const changeWay = idx => {
 		let arr = getLocationArr(getState)
 		let nowIdx = locationArr[playIdx]
 		let newidx = arr.findIndex(v => v === nowIdx)
-		if(newidx !== playIdx) dispatch(changePlaySongIdx(newidx))
+		if (newidx !== playIdx) dispatch(changePlaySongIdx(newidx))
 
 		dispatch(locationArrAct(arr))
 	}
@@ -121,7 +121,7 @@ export const changeSong = ActionIdx => {
 			newIdx = playList.length - 1
 		}
 
-		if ((playSong.id && way === 'one') || (playSong.id && playList.length === 1 && way === 'loop')) {
+		if (playSong.id && way === 'one') {
 			dispatch(changePlaySong({ ...playSong }))
 		} else {
 			let nowSongInfo = playList[locationArr[newIdx]]
@@ -130,7 +130,7 @@ export const changeSong = ActionIdx => {
 				let song = res.data[0]
 				dispatch(changePlaySongIdx(newIdx))
 				dispatch(changePlaySong(song))
-				dispatch(changePlaySongInfoAct({...nowSongInfo}))
+				dispatch(changePlaySongInfoAct({ ...nowSongInfo }))
 			})
 		}
 
@@ -197,5 +197,46 @@ export const addSongToList = info => {
 			let arr = getLocationArr(getState)
 			dispatch(locationArrAct(arr))
 		})
+	}
+}
+
+export const deletePlayListSong = idx => {
+	return (dispatch, getState) => {
+		let deleteAll = !idx && idx !== 0 ? true : false;
+
+		if (deleteAll) {
+			dispatch(changeList([]))
+			dispatch(locationArrAct([]))
+			dispatch(changePlaySongIdx(-1))
+		} else {
+			let playList = getState().getIn(["player", "playList"])
+			let locationArr = getState().getIn(["player", "locationArr"])
+
+			let cpList = [...playList]
+			cpList.splice(idx, 1)
+			dispatch(changeList(cpList))
+
+			let cpLocArr = [...locationArr]
+			let arr = cpLocArr.filter(v => v !== idx).map(v => v > idx ? v - 1 : v)
+			dispatch(locationArrAct(arr))
+		}
+	}
+}
+
+const changePanelIsShowAct = show => {
+	return {
+		type: actionType.CHANGE_PANEL_IS_SHOW,
+		show
+	}
+}
+
+export const changePanelIsShow = state => {
+	return (dispatch, getState) => {
+		let res = state
+		if(state === undefined) {
+			let panelIsShow = getState().getIn(["player", "panelIsShow"])
+			res = !panelIsShow
+		}
+		dispatch(changePanelIsShowAct(res))
 	}
 }

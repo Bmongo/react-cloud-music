@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { defaultAlbumImgLink } from "@/common/local-data";
 import { playWayArr } from "@/common/player-local-data"
-import { getListDetail, changeSong, changeWay } from "../../store/actionCreators"
+import { getListDetail, changeSong, changeWay, changePanelIsShow } from "../../store/actionCreators"
 import { getListIds, getPlayWay, setListIds, setPlayWay } from "@/utils/playerCookie";
 import { formatMinuteSecond } from '@/utils/format';
 
@@ -102,6 +102,10 @@ const PlayerBar = memo(() => {
 		setNowTime(0)
 	}
 
+	const panelChange = useCallback(() => {
+		dispatch(changePanelIsShow())
+	}, [dispatch])
+
 	return (
 		<>
 			<LeftWrapper>
@@ -174,7 +178,7 @@ const PlayerBar = memo(() => {
 				<div className="btns-r">
 					<button className="btn playbar-img volume"></button>
 					<button className={"btn playbar-img " + playWayType} onClick={() => dispatch(changeWay())}></button>
-					<div className="list-box">
+					<div className="list-box" onClick={panelChange}>
 						<div className="content playbar-img">{playList.length}</div>
 					</div>
 				</div>

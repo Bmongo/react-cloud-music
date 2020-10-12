@@ -19,7 +19,7 @@ export const PlayWrapper = styled.div`
 		margin: 0 auto;
 	}
 	
-	.container.lock {
+	.container.lock, .panel-show {
 		top: -53px;
 	}
 	.container:hover {

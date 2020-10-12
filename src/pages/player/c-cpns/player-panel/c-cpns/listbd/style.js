@@ -41,4 +41,15 @@ export const Wrapper = styled.div`
 
 		ul { color: #ccc; }
 	}
+
+	.msk2 {
+		position: absolute;
+    left: 560px;
+    top: 0;
+    z-index: 3;
+    width: 420px;
+    height: 250px;
+    background: #121212;
+    opacity: .01;
+	}
 `

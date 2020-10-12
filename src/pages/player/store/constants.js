@@ -5,3 +5,4 @@ export const CHANGE_PLAY_LIST = "player/CHANGE_PLAY_LIST";
 export const CHANGE_PLAY_WAY = "player/CHANGE_PLAY_WAY"
 export const ADD_SONG_TO_LIST = "player/ADD_SONG_TO_LIST"
 export const CHANGE_LOCATION_ARR = "player/CHANGE_LOCATION_ARR"
+export const CHANGE_PANEL_IS_SHOW = "player/CHANGE_PANEL_IS_SHOW"

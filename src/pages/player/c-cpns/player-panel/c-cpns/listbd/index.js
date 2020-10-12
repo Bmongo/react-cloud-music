@@ -20,12 +20,13 @@ const ListBd = memo(() => {
 			<div className="list">
 				<ul>
 					{
-						playList.map(v => {
-							return <ListItem key={v.id} data={v} />
+						playList.map((v, idx) => {
+							return <ListItem key={v.id} data={v} idx={idx}/>
 						})
 					}
 				</ul>
 			</div>
+			<div className="msk2"></div>
 		</Wrapper>
 	);
 });

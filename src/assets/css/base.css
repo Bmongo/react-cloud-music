@@ -101,3 +101,7 @@
 .playlist-img {
 	background: url("../img/playlist.png") no-repeat 0 -9999px;
 }
+
+.sprite-img {
+	background: url("../img/sprite.png") no-repeat 0 -9999px;
+}

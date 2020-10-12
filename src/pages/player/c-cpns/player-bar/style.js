@@ -138,6 +138,7 @@ export const PlayInfo = styled.div`
 		.artist {
 			max-width: 220px;
     	margin-left: 15px;
+			line-height: 28px;
 			color: #9b9b9b;
 			text-shadow: 0 1px 0 #171717;
 
@@ -148,6 +149,7 @@ export const PlayInfo = styled.div`
 			}
 			.item:hover { text-decoration: underline; }
 		}
+		.artist:hover { text-decoration: underline; }
 	}
 
 	.barinfo {

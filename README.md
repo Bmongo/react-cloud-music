@@ -5,5 +5,5 @@ React网易云音乐
 
 ### 1.1. 项目首页
 
-![首页](https://github.com/Bmongo/picture-bed/blob/main/cloud-music/index.png?raw=true)
+![首页](https://raw.githubusercontent.com/Bmongo/picture-bed/main/cloud-music/index.png)
 

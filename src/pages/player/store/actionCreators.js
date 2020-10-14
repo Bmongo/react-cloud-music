@@ -1,7 +1,7 @@
 import * as actionType from "./constants";
 import { shuffleFun } from "@/utils/utilsFun";
 import { playWayArr } from "@/common/player-local-data";
-import { fetchSongUrl, fetchSongsDetail } from "@/services/player"
+import { fetchSongUrl, fetchSongsDetail, fetchListDetail } from "@/services/player"
 
 const locationArrAct = arr => {
 	return {
@@ -238,5 +238,49 @@ export const changePanelIsShow = state => {
 			res = !panelIsShow
 		}
 		dispatch(changePanelIsShowAct(res))
+	}
+}
+
+export const playNewList = listId => {
+	return (dispatch, getState) => {
+		fetchListDetail(listId).then(res => {
+			dispatch(changeList(res.playlist.tracks))
+			let arr = getLocationArr(getState)
+			dispatch(locationArrAct(arr))
+			let idx = arr[0]
+
+			let songInfo = res.playlist.tracks[idx]
+
+			fetchSongUrl(songInfo.id).then(res => {
+				let song = res.data[0]
+				dispatch(changePlaySong(song))
+				dispatch(changePlaySongIdx(0))
+				dispatch(changePlaySongInfoAct(songInfo))
+			})
+		}).catch(() => {})
+	}
+}
+
+export const addNewListToList = listId => {
+	return (dispatch, getState) => {
+		let playList = getState().getIn(["player", "playList"])
+		let playIdx = getState().getIn(["player", "playIdx"])
+		let locationArr = getState().getIn(["player", "locationArr"])
+		
+		fetchListDetail(listId).then(res => {
+			let listArr = res.playlist.tracks;
+			let oldIds = playList.map(v => v.id)
+			let newSongs = listArr.filter(v => !oldIds.includes(v.id))
+			let newList = [...playList, ...newSongs]
+
+			dispatch(changeList(newList))
+			let arr = getLocationArr(getState)
+			dispatch(locationArrAct(arr))
+
+			let oldIdx = locationArr[playIdx]
+			let newIdx = newList.findIndex(v => v === oldIdx)
+			dispatch(changePlaySongIdx(newIdx))
+
+		}).catch(() => {})
 	}
 }

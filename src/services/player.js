@@ -14,3 +14,10 @@ export const fetchSongsDetail = idsInfo => {
 		params: { ids }
 	})
 }
+
+export const fetchListDetail = id => {
+	return request({
+		url: "/playlist/detail",
+		params: { id }
+	})
+}

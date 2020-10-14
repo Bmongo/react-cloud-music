@@ -1,25 +1,31 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addSongToList, changeSongById } from "@/pages/player/store/actionCreators";
+import { addNewListToList, addSongToList, changeSongById, playNewList } from "@/pages/player/store/actionCreators";
 
 import { Link } from "react-router-dom";
 import { ToplistItemWrapper } from "./style"
 
 const ToplistItem = memo(props => {
-	const { coverImgUrl, id, name, tracks = [] } = props.info
+  const { coverImgUrl, id, name, tracks = [] } = props.info
 
 	const dispatch = useDispatch()
 	
-	const playItem = id => {
+	const playItem = useCallback(id => {
     dispatch(changeSongById(id))
-	}
-	const addItem = id => {
+	},[dispatch])
+	const addItem = useCallback(id => {
 		dispatch(addSongToList(id))
-	}
-	const favItem = id => {
-		console.log(id);
-	}
+	},[dispatch])
+	const playList = useCallback(id => {
+    dispatch(playNewList(id))
+  },[dispatch])
+  const favItem = useCallback(id => {
+    console.log(id)
+  },[])
+	const addList = useCallback(id => {
+    dispatch(addNewListToList(id))
+	},[dispatch])
 	
   return (
     <ToplistItemWrapper>
@@ -34,8 +40,8 @@ const ToplistItem = memo(props => {
               <h3 className="head-title nowrap">{name}</h3>
             </Link>
             <div className="btns">
-              <button className="play-btn btn index-img"/>
-              <button className='favorites btn index-img'/>
+              <button className="play-btn btn index-img" onClick={() => playList(id)}/>
+              <button className='favorites btn index-img' onClick={() => addList(id)}/>
             </div>
           </div>
         </dt>

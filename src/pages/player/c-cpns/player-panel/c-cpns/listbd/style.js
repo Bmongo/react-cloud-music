@@ -37,7 +37,7 @@ export const Wrapper = styled.div`
     z-index: 4;
     height: 260px;
     width: 553px;
-    overflow: hidden;
+    overflow-y: scroll;
 
 		ul { color: #ccc; }
 	}

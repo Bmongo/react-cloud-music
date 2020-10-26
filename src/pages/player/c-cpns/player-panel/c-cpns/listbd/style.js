@@ -52,4 +52,39 @@ export const Wrapper = styled.div`
     background: #121212;
     opacity: .01;
 	}
+
+	.lyric-list {
+		position: absolute;
+    right: 40px;
+    top: 0;
+    z-index: 4;
+    margin: 21px 0 20px 0;
+    height: 219px;
+    width: 354px;
+		overflow: hidden;
+
+		.lrc {
+			width: 100%;
+			position: absolute;
+			top: 0;
+			transition: top 0.7s linear;
+		}
+
+		.lrc p {
+			color: #989898;
+			word-wrap: break-word;
+			text-align: center;
+			line-height: 32px;
+			height: auto !important;
+			height: 32px;
+			min-height: 32px;
+			transition: color 0.7s linear;
+		}
+
+		.lrc p.active {
+			color: #fff;
+			font-size: 14px;
+			transition: color 0.7s linear;
+		}
+	}
 `

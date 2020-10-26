@@ -1,7 +1,7 @@
 import * as actionType from "./constants";
-import { shuffleFun } from "@/utils/utilsFun";
+import { shuffleFun, lyricParse } from "@/utils/utilsFun";
 import { playWayArr } from "@/common/player-local-data";
-import { fetchSongUrl, fetchSongsDetail, fetchListDetail } from "@/services/player"
+import { fetchSongUrl, fetchSongsDetail, fetchListDetail, fetchLyric } from "@/services/player"
 
 const locationArrAct = arr => {
 	return {
@@ -101,6 +101,14 @@ const changePlaySongInfoAct = info => {
 	}
 }
 
+const changeLyric = str => {
+	let res = lyricParse(str)
+	return {
+		type: actionType.CHANGE_LYRIC,
+		lyric: res
+	}
+}
+
 export const changeSong = ActionIdx => {
 	return (dispatch, getState) => {
 		ActionIdx = !ActionIdx && ActionIdx !== 0 ? 1 : ActionIdx
@@ -132,6 +140,10 @@ export const changeSong = ActionIdx => {
 				dispatch(changePlaySong(song))
 				dispatch(changePlaySongInfoAct({ ...nowSongInfo }))
 			})
+			// 获取歌词
+			fetchLyric(nowSongInfo.id).then(res => {
+				dispatch(changeLyric(res.lrc.lyric))
+			})
 		}
 
 	}
@@ -160,6 +172,10 @@ export const changeSongById = id => {
 					dispatch(changePlaySong(song))
 					dispatch(changePlaySongIdx(arr.findIndex(v => v === playList.length)))
 				})
+				// 获取歌词
+				fetchLyric(id).then(res => {
+					dispatch(changeLyric(res.lrc.lyric))
+				})
 			})
 		} else {
 			fetchSongUrl(id).then(res => {
@@ -167,6 +183,10 @@ export const changeSongById = id => {
 				dispatch(changePlaySong(song))
 				dispatch(changePlaySongIdx(locationArr.findIndex(v => v === oldIdx)))
 				dispatch(changePlaySongInfoAct(playList[oldIdx]))
+			})
+			// 获取歌词
+			fetchLyric(id).then(res => {
+				dispatch(changeLyric(res.lrc.lyric))
 			})
 		}
 
@@ -233,7 +253,7 @@ const changePanelIsShowAct = show => {
 export const changePanelIsShow = state => {
 	return (dispatch, getState) => {
 		let res = state
-		if(state === undefined) {
+		if (state === undefined) {
 			let panelIsShow = getState().getIn(["player", "panelIsShow"])
 			res = !panelIsShow
 		}
@@ -257,7 +277,12 @@ export const playNewList = listId => {
 				dispatch(changePlaySongIdx(0))
 				dispatch(changePlaySongInfoAct(songInfo))
 			})
-		}).catch(() => {})
+
+			// 获取歌词
+			fetchLyric(songInfo.id).then(res => {
+				dispatch(changeLyric(res.lrc.lyric))
+			})
+		}).catch(() => { })
 	}
 }
 
@@ -266,7 +291,7 @@ export const addNewListToList = listId => {
 		let playList = getState().getIn(["player", "playList"])
 		let playIdx = getState().getIn(["player", "playIdx"])
 		let locationArr = getState().getIn(["player", "locationArr"])
-		
+
 		fetchListDetail(listId).then(res => {
 			let listArr = res.playlist.tracks;
 			let oldIds = playList.map(v => v.id)
@@ -281,6 +306,12 @@ export const addNewListToList = listId => {
 			let newIdx = newList.findIndex(v => v === oldIdx)
 			dispatch(changePlaySongIdx(newIdx))
 
-		}).catch(() => {})
+		}).catch(() => { })
+	}
+}
+
+export const changeNowTime = time => {
+	return dispatch => {
+		dispatch({ type: actionType.CHANGE_NOW_TIME, time })
 	}
 }

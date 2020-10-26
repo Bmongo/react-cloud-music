@@ -21,3 +21,10 @@ export const fetchListDetail = id => {
 		params: { id }
 	})
 }
+
+export const fetchLyric = id => {
+	return request({
+		url: "/lyric",
+		params: { id }
+	})
+}

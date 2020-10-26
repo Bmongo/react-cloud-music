@@ -11,7 +11,11 @@ const defaultState = Map({
 	playList: [],
 	
 	// 存放播放列表的idx
-	locationArr: []
+	locationArr: [],
+
+	// 歌词部分
+	nowTime:0,
+	lyric: []
 })
 
 function reducer(state = defaultState, action) {
@@ -30,6 +34,10 @@ function reducer(state = defaultState, action) {
 			return state.set("playSongInfo", action.info);
 		case actionType.CHANGE_PANEL_IS_SHOW:
 			return state.set("panelIsShow", action.show);
+		case actionType.CHANGE_LYRIC:
+			return state.set("lyric", action.lyric);
+		case actionType.CHANGE_NOW_TIME:
+			return state.set("nowTime", action.time);
     default:
       return state;
   }

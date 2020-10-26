@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { defaultAlbumImgLink } from "@/common/local-data";
 import { playWayArr } from "@/common/player-local-data"
-import { getListDetail, changeSong, changeWay, changePanelIsShow } from "../../store/actionCreators"
+import { getListDetail, changeSong, changeWay, changePanelIsShow, changeNowTime } from "../../store/actionCreators"
 import { getListIds, getPlayWay, setListIds, setPlayWay } from "@/utils/playerCookie";
 import { formatMinuteSecond } from '@/utils/format';
 
@@ -88,6 +88,7 @@ const PlayerBar = memo(() => {
 	const timeUpdate = () => {
 		if (!isChanging) {
 			let t = audioRef.current.currentTime
+			dispatch(changeNowTime(t * 1000))
 			let time = Math.floor(t)
 			if (nowTime !== time * 1000) {
 				setNowTime(time * 1000)

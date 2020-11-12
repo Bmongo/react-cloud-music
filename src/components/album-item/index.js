@@ -1,4 +1,7 @@
 import React, { memo, Fragment } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { playNewList } from "@/pages/player/store/actionCreators";
 
 import { Link } from "react-router-dom"
 import { Container } from "./style"
@@ -14,10 +17,12 @@ const AlbumItem = memo(props => {
     backgroundPosition = "0 -570px",
     info = {}
   } = props;
-  const { id, name, picUrl, artists } = info;
+	const { id, name, picUrl, artists } = info;
+	
+	const dispatch = useDispatch()
 
   const addPlaylist = () => {
-		console.log("eee");
+		dispatch(playNewList(id, "album"))
 	}
 
   return (

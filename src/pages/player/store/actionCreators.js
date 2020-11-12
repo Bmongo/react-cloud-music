@@ -2,6 +2,7 @@ import * as actionType from "./constants";
 import { shuffleFun, lyricParse } from "@/utils/utilsFun";
 import { playWayArr } from "@/common/player-local-data";
 import { fetchSongUrl, fetchSongsDetail, fetchListDetail, fetchLyric } from "@/services/player"
+import { fetchAlbumSongs } from "@/services/album"
 
 const locationArrAct = arr => {
 	return {
@@ -142,7 +143,7 @@ export const changeSong = ActionIdx => {
 			})
 			// 获取歌词
 			fetchLyric(nowSongInfo.id).then(res => {
-				dispatch(changeLyric(res.lrc.lyric))
+				res.lrc && dispatch(changeLyric(res.lrc.lyric))
 			})
 		}
 
@@ -186,7 +187,7 @@ export const changeSongById = id => {
 			})
 			// 获取歌词
 			fetchLyric(id).then(res => {
-				dispatch(changeLyric(res.lrc.lyric))
+				res.lrc && dispatch(changeLyric(res.lrc.lyric))
 			})
 		}
 
@@ -261,15 +262,23 @@ export const changePanelIsShow = state => {
 	}
 }
 
-export const playNewList = listId => {
+export const playNewList = (listId, listType = "list") => {
 	return (dispatch, getState) => {
-		fetchListDetail(listId).then(res => {
-			dispatch(changeList(res.playlist.tracks))
+		const fun = (
+			listType === 'list' ? fetchListDetail :
+			listType === 'album' ? fetchAlbumSongs : null
+		)
+		if (!fun) return
+		fun(listId).then(res => {
+			const data =
+				listType === 'list' ? res.playlist.tracks :
+				listType === 'album' ? res.songs : [];
+			dispatch(changeList(data))
 			let arr = getLocationArr(getState)
 			dispatch(locationArrAct(arr))
 			let idx = arr[0]
 
-			let songInfo = res.playlist.tracks[idx]
+			let songInfo = data[idx]
 
 			fetchSongUrl(songInfo.id).then(res => {
 				let song = res.data[0]

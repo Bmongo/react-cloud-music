@@ -80,6 +80,10 @@ export const Wrapper = styled.div`
 			min-height: 32px;
 			transition: color 0.7s linear;
 		}
+		
+		.lrc p.no-lrc {
+			padding-top: 85px;
+		}
 
 		.lrc p.active {
 			color: #fff;

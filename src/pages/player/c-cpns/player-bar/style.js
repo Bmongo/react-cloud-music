@@ -184,4 +184,8 @@ export const PlayInfo = styled.div`
 		}
 		.ant-slider-handle:hover { background: url(${require("@/assets/img/ply_btn_hvr.png")}) 0 0; }
 	}
+
+	.art {
+		color: #9b9b9b;
+	}
 `

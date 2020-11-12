@@ -1,6 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { getCount } from "@/utils/format"
+import { playNewList } from '@/pages/player/store/actionCreators';
 
 import { Link } from "react-router-dom";
 import { ImgArea, DesArea } from "./style";
@@ -8,9 +10,11 @@ import { ImgArea, DesArea } from "./style";
 const PlaylistItem = memo(props => {
 	const { data } = props
 
-	const addPlaylist = () => {
-		console.log("eee");
-	}
+	const dispatch = useDispatch()
+
+	const addPlaylist = useCallback(() => {
+		dispatch(playNewList(data.id))
+	}, [dispatch])
 
 	return (
 		<>

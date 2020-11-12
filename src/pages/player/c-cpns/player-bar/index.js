@@ -134,10 +134,10 @@ const PlayerBar = memo(() => {
 						playSongInfo.id ? (
 							<>
 								<Link className="name nowrap" to={"/song?id=" + playSongInfo.id}>{playSongInfo.name}</Link>
-								<div className="nowrap">
+								<div className="nowrap art">
 									{
 										playSongInfo.ar.map((v, i) => {
-											let tag = <Link key={'ky' + v.id} className="artist" to={"/artist?id=" + v.id}>{v.name}</Link>
+											let tag = <Link key={'ky' + v.id} className={i === 0 ? "artist" : "artist no-margin"} to={"/artist?id=" + v.id}>{v.name}</Link>
 											if (i !== 0) {
 												return (
 													<Fragment key={'k' + v.id}>/{tag}</Fragment>

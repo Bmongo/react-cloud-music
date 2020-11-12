@@ -10,9 +10,10 @@ const ListBd = memo(() => {
 	let [lrcs, setLrcs] = useState([])
 	let [curIdx, setCurIdx] = useState(0)
 
-	let { playSongInfo, playList, lyric, nowTime } = useSelector(state => ({
+	let { playSongInfo, playList, lyric, nowTime, playIdx } = useSelector(state => ({
 		playSongInfo: state.getIn(["player", "playSongInfo"]),
 		playList: state.getIn(["player", "playList"]),
+		playIdx: state.getIn(["player", "playIdx"]),
 		lyric: state.getIn(["player", "lyric"]),
 		nowTime: state.getIn(["player", "nowTime"])
 	}))
@@ -62,6 +63,9 @@ const ListBd = memo(() => {
 			<div className="lyric-list">
 				<div className="lrc" style={changeTop()}>
 					{
+						playIdx !== -1 && lrcs.length <= 0 ? 
+						<p className="no-lrc">纯音乐，无歌词</p>
+						:
 						lrcs.map(v => {
 							return <p key={v.time} className={v.active ? "active" : ""}>{v.lrc}</p>
 						})

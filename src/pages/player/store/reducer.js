@@ -2,7 +2,7 @@ import { Map } from "immutable";
 import * as actionType from "./constants";
 
 const defaultState = Map({
-	panelIsShow: true,
+	panelIsShow: false,
   //0循环 1随机 2单曲循环
   playWay: 0,
 	playIdx: -1,

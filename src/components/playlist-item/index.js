@@ -14,7 +14,7 @@ const PlaylistItem = memo(props => {
 
 	const addPlaylist = useCallback(() => {
 		dispatch(playNewList(data.id))
-	}, [dispatch])
+	}, [dispatch, data])
 
 	return (
 		<>

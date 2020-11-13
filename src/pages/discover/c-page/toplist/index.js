@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { fetchTopList } from "./store/actionCreators"
 
 import { ToplistWrapper, LeftWrapper, RightWrapper } from './style';
-import FeatureList from "./c-cpns/feature-list"
+import LeftList from "./c-cpns/left-list"
 
 export default memo(function Toplist() {
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ export default memo(function Toplist() {
 	return (
 		<ToplistWrapper className="wrap3-img wrap-v2">
 			<LeftWrapper>
-				<FeatureList/>
+				<LeftList/>
 			</LeftWrapper>
 			<RightWrapper>
 				2

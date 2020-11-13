@@ -5,7 +5,6 @@ export const ToplistWrapper = styled.div`
   border-top: 0;
   border-bottom: 0;
   display: flex;
-  height: 999px;
 `
 
 export const LeftWrapper = styled.div`

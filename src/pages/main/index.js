@@ -11,12 +11,12 @@ import Player from '@/pages/player'
 export default memo(function App() {
 	return (
 		<HashRouter>
-			<AppHeader/>
+			<AppHeader />
 			<Suspense fallback={<div>loading</div>}>
-        {renderRoutes(routes)}
-      </Suspense>
-			<Player/>
-			<AppFooter/>
+				{renderRoutes(routes)}
+			</Suspense>
+			<Player />
+			<AppFooter />
 		</HashRouter>
 	)
 })

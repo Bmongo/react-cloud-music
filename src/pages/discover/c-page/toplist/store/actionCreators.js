@@ -1,5 +1,6 @@
 import * as actionType from "./constants";
 import { fetchAllTopList } from "@/services/toplist"
+import { fetchListDetail } from "@/services/player";
 
 const changeTopListAct = res => {
   return {
@@ -16,4 +17,23 @@ export const fetchTopList = () => {
       console.log(e)
     })
   }
+}
+
+const changeCurrentIdAct = (id, res) => {
+	return {
+		type: actionType.CHANGE_CURRENT_ID,
+		id,
+		currentList: res.playlist
+	}
+}
+
+export const changeCurrentId = id => {
+	id = id || 19723756;
+	return dispatch => {
+		fetchListDetail(id).then(res => {
+			dispatch(changeCurrentIdAct(id, res))
+		}).catch(e => {
+			console.log(e);
+		})
+	}
 }

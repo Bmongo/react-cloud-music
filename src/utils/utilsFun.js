@@ -14,7 +14,7 @@ export const shuffleFun = arr => {
 }
 
 export const lyricParse = str => {
-	if(!str || typeof str !== 'string') return []
+	if (!str || typeof str !== 'string') return []
 	let strArr = str.split("\n")
 	return strArr.filter(v => v).map(v => {
 		let item = {}
@@ -27,4 +27,15 @@ export const lyricParse = str => {
 		item.lrc = v.match(/^\[(.*)\](.*)/)[2].trim()
 		return item
 	}).filter(v => v.lrc)
+}
+
+export const urlParamsParse = str => {
+	if (!str) return null;
+	str = str[0] === '?' ? str.substr(1,) : str
+	const data = str.split("&").map(v => v.split("="));
+	let obj = {}
+	for (let i = 0; i < data.length; i += 2) {
+		obj[data[i][0]] = data[i][1]
+	}
+	return obj
 }
